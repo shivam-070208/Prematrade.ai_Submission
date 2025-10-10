@@ -13,7 +13,6 @@ export async function POST(request: NextRequest) {
             );
         }
         const user = await User.login(email, password);
-        
         if (!user) {
             return NextResponse.json(
                 { message: "Invalid credentials" },

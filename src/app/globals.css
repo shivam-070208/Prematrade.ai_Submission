@@ -1,7 +1,6 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
+@custom-variant dark (&:is(.dark *)); 
 :root {
   --background: oklch(1.0000 0 0);
   --foreground: oklch(0 0 0);
@@ -161,4 +160,13 @@
   --shadow-lg: var(--shadow-lg);
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
+}
+
+@layer utilities{
+  .btn-brutual{
+    @apply shadow-xs bg-primary cursor-pointer text-primary-foreground px-2 py-2 hover:shadow-none transition duration-200;
+  }
+  input{
+    @apply outline-accent;
+  }
 }

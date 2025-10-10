@@ -8,7 +8,7 @@ export default function Heroic() {
       {/* Label */}
       <span className={cn(
         "bg-secondary text-secondary-foreground",
-        "rounded px-3 py-2 cursor-pointer",
+        " px-3 py-2 cursor-pointer",
         "transition-all duration-75 ease-in-out",
         "shadow-xs hover:shadow-none "
       )}>
@@ -26,7 +26,7 @@ export default function Heroic() {
       </p>
 
       {/* Optional CTA Button */}
-      <button className="mt-8 px-6 py-3 rounded text-primary-foreground cursor-pointer shadow-xs hover:shadow-none bg-primary hover:bg-primary/90 transition">
+      <button className="mt-8  btn-brutual px-6! py-3! ">
         Publish Your First Blog<BiLinkExternal className='inline ml-1' />
       </button>
       
