@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/UserModel"; // Assuming you have a User model set up with Mongoose
-import { setSession } from "@/lib/Session";
+import { setSession } from "@/utils/Session";
 
 // Define the route for POST /api/signup
 export async function POST(request: NextRequest) {

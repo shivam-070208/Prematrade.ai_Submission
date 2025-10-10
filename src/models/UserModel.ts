@@ -1,7 +1,7 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Document, Schema, Model } from "mongoose";
 import bcrypt from "bcryptjs";
 
-// Define the User interface (TypeScript type definition)
+// User interface definition
 export interface IUser extends Document {
   username: string;
   email: string;
@@ -13,7 +13,11 @@ export interface IUser extends Document {
   updatedAt: Date;
 }
 
-// Define the UserSchema
+// Add static login method to the type definition
+export interface IUserModel extends Model<IUser> {
+  login(email: string, password: string): Promise<IUser | null>;
+}
+
 const UserSchema = new Schema<IUser>(
   {
     username: {
@@ -40,12 +44,12 @@ const UserSchema = new Schema<IUser>(
     firstName: {
       type: String,
       maxlength: [50, "First name can be at most 50 characters long"],
-      required:true
+      required: true,
     },
     lastName: {
       type: String,
       maxlength: [50, "Last name can be at most 50 characters long"],
-      required:true
+      required: true,
     },
     avatar: {
       type: String,
@@ -54,7 +58,6 @@ const UserSchema = new Schema<IUser>(
   { timestamps: true }
 );
 
-// Pre-save hook to hash the password
 UserSchema.pre<IUser>("save", async function (next) {
   if (this.isModified("password")) {
     const hashedPassword = await bcrypt.hash(this.password, 10);
@@ -63,7 +66,19 @@ UserSchema.pre<IUser>("save", async function (next) {
   next();
 });
 
+UserSchema.statics.login = async function (email: string, password: string) {
+  const user = await this.findOne({ email });
+  if (!user) return null;
+
+  const isMatch = await bcrypt.compare(password, user.password);
+  if (!isMatch) return null;
+
+  return user;
+};
+
 // Create the User model from the schema
-const User = mongoose.models.User || mongoose.model<IUser>("User", UserSchema);
+const User =
+  (mongoose.models.User ||
+    mongoose.model<IUser, IUserModel>("User", UserSchema)) as IUserModel;
 
 export default User;
