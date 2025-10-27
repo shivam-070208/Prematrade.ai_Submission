@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
+import { BiLeftArrow } from 'react-icons/bi'
 
 interface SignupForm {
   firstName: string
@@ -43,6 +44,7 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="max-w-md w-full p-6 bg-card rounded-lg shadow-lg">
+      <Link href="/"><BiLeftArrow className='text-foreground text-xl' /></Link>
         <h1 className="text-2xl font-bold text-center mb-6">Create an Account</h1>
         
         {error && (
@@ -118,6 +120,7 @@ export default function SignupPage() {
                   message: 'Password must be at least 6 characters',
                 },
               })}
+              pattern='^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,}$'
               className="w-full p-2 rounded-md border bg-background"
             />
             {errors.password && (

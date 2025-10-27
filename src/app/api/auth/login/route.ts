@@ -1,10 +1,12 @@
 import { NextRequest, NextResponse } from "next/server";
 import User from "@/models/UserModel"; 
 import { setSession } from "@/utils/Session";
+import { ConnectDb } from "@/lib/Connectdb";
 
 
 export async function POST(request: NextRequest) {
     try {
+        await ConnectDb();
         const { email, password } = await request.json();
         if (!email || !password) {
             return NextResponse.json(

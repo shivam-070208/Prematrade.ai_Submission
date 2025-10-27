@@ -34,13 +34,13 @@ export default function Navbar() {
   const AuthButtons = () => (
     <div className="flex items-center space-x-4">
       <Link
-        href="/auth/login"
+        href="/login"
         className="text-sm text-foreground hover:text-primary transition duration-300"
       >
         Login
       </Link>
       <Link
-        href="/auth/signup"
+        href="/signup"
         className="text-sm bg-primary text-primary-foreground px-4 py-2 rounded-md hover:bg-primary/90 transition duration-300 shadow-xs hover:shadow-none"
       >
         Sign Up
@@ -49,7 +49,7 @@ export default function Navbar() {
   );
 
   return (
-    <nav className="w-full sticky top-0 z-50  ">
+    <nav className="w-full sticky top-0 z-50 transition-all h-fit ">
       {/* Main Container */}
       <div className="  px-4 flex justify-between items-center py-4">
         {/* Logo */}
@@ -73,7 +73,10 @@ export default function Navbar() {
         {/* Profile Icon or Auth Buttons */}
         <div className="hidden sm:flex items-center space-x-4">
           {isAuthenticated ? (
-            <div className="relative">
+            <div className="relative flex gap-2 items-center">
+              <Link href={'/create-blog'} className='bg-background  px-2 py-2 border-foreground border rounded-full text-foreground '>
+                + Create Blog
+              </Link>
               <FaUserCircle size={32} className="text-muted-foreground hover:text-primary cursor-pointer transition duration-200" />
             </div>
           ) : (
@@ -91,7 +94,7 @@ export default function Navbar() {
 
       {/* Mobile Menu (Dropdown) */}
       {isMobileMenuOpen && (
-        <div className="sm:hidden  flex flex-col items-center space-y-4 py-4">
+        <div className="sm:hidden border-b border-b-primary/60 flex flex-col items-center space-y-4 py-4">
           {navLinks.map((link) => (
             <Link
               key={link.name}
@@ -101,7 +104,7 @@ export default function Navbar() {
               {link.name}
             </Link>
           ))}
-          {!isAuthenticated && (
+          {!isAuthenticated ?(
             <>
               <Link
                 href="/login"
@@ -116,7 +119,14 @@ export default function Navbar() {
                 Sign Up
               </Link>
             </>
-          )}
+          ):(
+            <div className="relative flex  gap-2 items-center">
+              <Link href={'#'} className='bg-background  px-2 py-2 border-foreground border rounded-full text-foreground '>
+                + Create Blog
+              </Link>
+              <FaUserCircle size={32} className="text-muted-foreground hover:text-primary cursor-pointer transition duration-200" />
+            </div>
+            )}
         </div>
       )}
     </nav>

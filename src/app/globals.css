@@ -162,9 +162,9 @@
   --shadow-2xl: var(--shadow-2xl);
 }
 
-@layer utilities{
+@layer base{
   .btn-brutual{
-    @apply shadow-xs bg-primary cursor-pointer text-primary-foreground px-2 py-2 hover:shadow-none transition duration-200;
+    @apply shadow-xs bg-primary  disabled:bg-primary/80 disabled:cursor-not-allowed cursor-pointer text-primary-foreground px-2 py-2 hover:shadow-none transition duration-200;
   }
   input{
     @apply outline-accent;
