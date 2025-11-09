@@ -8,7 +8,6 @@ export default function Navbar() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Check session status on component mount
     const checkAuth = async () => {
       try {
         const response = await fetch('/api/auth/check-auth');

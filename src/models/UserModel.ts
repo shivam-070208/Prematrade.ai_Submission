@@ -55,7 +55,7 @@ const UserSchema = new Schema<IUser>(
       type: String,
     },
   },
-  { timestamps: true }
+  { timestamps: true },
 );
 
 UserSchema.pre<IUser>("save", async function (next) {
@@ -77,8 +77,6 @@ UserSchema.statics.login = async function (email: string, password: string) {
 };
 
 // Create the User model from the schema
-const User =
-  (mongoose.models.User ||
-    mongoose.model<IUser, IUserModel>("User", UserSchema)) as IUserModel;
+const User = (mongoose.models?.User || mongoose.model<IUser, IUserModel>("User", UserSchema)) as IUserModel;
 
 export default User;

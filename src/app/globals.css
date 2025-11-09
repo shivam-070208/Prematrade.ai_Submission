@@ -180,4 +180,7 @@
   h3 {
     @apply text-lg font-medium;
   }
+} 
+::-webkit-scrollbar{
+  display: none;
 }

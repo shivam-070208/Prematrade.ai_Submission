@@ -13,16 +13,16 @@ export const ToggleButton: React.FC<props> = ({
   className,
 }) => {
   return (
-    <button
+    <span
       onClick={onClick}
       className={cn(
         isActive && "bg-muted-foreground/30",
         !isActive && "text-muted-foreground",
-        "cursor-pointer px-2 py-2",
+        "cursor-pointer px-2 py-2 inline-block",
         className,
       )}
     >
       {children}
-    </button>
+    </span>
   );
 };
